@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cube solver</title>
+    <link rel="stylesheet" href="modern-normalize.min.css">
+</head>
+<body>
+<nav>
+    <h1>Cube solver!</h1>
+    <button id="solve">Solve</button>
+</nav>
+<section id="cube-section" class="cube">
+    <div class="cube-container">
+        <div class="facesrow up">
+            <div class="face up">
+                <div class="row">
+                    <div id="sq_u0" class="square"></div>
+                    <div id="sq_u1" class="square"></div>
+                    <div id="sq_u2" class="square"></div>
+                </div>
+                <div class="row">
+                    <div id="sq_u3" class="square"></div>
+                    <div id="sq_u4" class="square"></div>
+                    <div id="sq_u5" class="square"></div>
+                </div>
+                <div class="row">
+                    <div id="sq_u6" class="square"></div>
+                    <div id="sq_u7" class="square"></div>
+                    <div id="sq_u8" class="square"></div>
+                </div>
+            </div>
+        </div>
+        <div class="facesrow triple">
+            <div class="face left">
+                <div class="row">
+                    <div id="sq_l0" class="square"></div>
+                    <div id="sq_l1" class="square"></div>
+                    <div id="sq_l2" class="square"></div>
+                </div>
+                <div class="row">
+                    <div id="sq_l3" class="square"></div>
+                    <div id="sq_l4" class="square"></div>
+                    <div id="sq_l5" class="square"></div>
+                </div>
+                <div class="row">
+                    <div id="sq_l6" class="square"></div>
+                    <div id="sq_l7" class="square"></div>
+                    <div id="sq_l8" class="square"></div>
+                </div>
+            </div>
+            <div class="face front">
+                <div class="row">
+                    <div id="sq_f0" class="square"></div>
+                    <div id="sq_f1" class="square"></div>
+                    <div id="sq_f2" class="square"></div>
+                </div>
+                <div class="row">
+                    <div id="sq_f3" class="square"></div>
+                    <div id="sq_f4" class="square"></div>
+                    <div id="sq_f5" class="square"></div>
+                </div>
+                <div class="row">
+                    <div id="sq_f6" class="square"></div>
+                    <div id="sq_f7" class="square"></div>
+                    <div id="sq_f8" class="square"></div>
+                </div>
+            </div>
+            <div class="face right">
+                <div class="row">
+                    <div id="sq_r0" class="square"></div>
+                    <div id="sq_r1" class="square"></div>
+                    <div id="sq_r2" class="square"></div>
+                </div>
+                <div class="row">
+                    <div id="sq_r3" class="square"></div>
+                    <div id="sq_r4" class="square"></div>
+                    <div id="sq_r5" class="square"></div>
+                </div>
+                <div class="row">
+                    <div id="sq_r6" class="square"></div>
+                    <div id="sq_r7" class="square"></div>
+                    <div id="sq_r8" class="square"></div>
+                </div>
+            </div>
+        </div>
+        <div class="facesrow down">
+            <div class="face down">
+                <div class="row">
+                    <div id="sq_d0" class="square"></div>
+                    <div id="sq_d1" class="square"></div>
+                    <div id="sq_d2" class="square"></div>
+                </div>
+                <div class="row">
+                    <div id="sq_d3" class="square"></div>
+                    <div id="sq_d4" class="square"></div>
+                    <div id="sq_d5" class="square"></div>
+                </div>
+                <div class="row">
+                    <div id="sq_d6" class="square"></div>
+                    <div id="sq_d7" class="square"></div>
+                    <div id="sq_d8" class="square"></div>
+                </div>
+            </div>
+        </div>
+        <div class="facesrow">
+            <div class="face back">
+                <div class="row">
+                    <div id="sq_b0" class="square"></div>
+                    <div id="sq_b1" class="square"></div>
+                    <div id="sq_b2" class="square"></div>
+                </div>
+                <div class="row">
+                    <div id="sq_b3" class="square"></div>
+                    <div id="sq_b4" class="square"></div>
+                    <div id="sq_b5" class="square"></div>
+                </div>
+                <div class="row">
+                    <div id="sq_b6" class="square"></div>
+                    <div id="sq_b7" class="square"></div>
+                    <div id="sq_b8" class="square"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="palette">
+        <div id="palette-white" class="square sq-white"></div>
+        <div id="palette-green" class="square sq-green"></div>
+        <div id="palette-red" class="square sq-red"></div>
+        <div id="palette-blue" class="square sq-blue"></div>
+        <div id="palette-yellow" class="square sq-yellow"></div>
+        <div id="palette-orange" class="square sq-orange"></div>
+    </div>
+</section>
+</body>
+<style>
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif;
+    font-weight: normal;
+    background-color: #dfd;
+}
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 0;
+}
+section.cube {
+    background-color: #ddf;
+    flex-grow: 1;
+    position: relative;
+}
+section.cube .cube-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.palette {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    border: 1px solid black;
+}
+section.cube .facesrow {
+    display: flex;
+}
+section.cube .face {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+section.cube .row {
+    flex-grow: 1;
+    display: flex;
+}
+.square {
+    background-color: gray;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+.square.sq-white {
+    background-color: white;
+}
+.square.sq-red {
+    background-color: red;
+}
+.square.sq-green {
+    background-color: green;
+}
+.square.sq-blue {
+    background-color: blue;
+}
+.square.sq-yellow {
+    background-color: yellow;
+}
+.square.sq-orange {
+    background-color: orange;
+}
+.square.selected {
+     border: 5px dashed black;
+}
+.face.up {
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+.face.left {
+    border-left: 1px solid black;
+}
+.face.right {
+    border-right: 1px solid black;
+}
+.face.down {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+.face.back {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.face.up .row:last-child .square {
+    border-bottom: 0;
+}
+.facesrow.triple {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.face.down .row:first-child .square {
+    border-top: 0;
+}
+</style>
+<style id="square-size-style">
+.square {
+    width: 2em;
+    height: 6em;
+}
+</style>
+<script type="module">
+
+// <script type="module" src="min2phase.js"
+import min2phase from './min2phase.js'
+const x = min2phase.randomCube()
+console.log(x)
+
+const ColourWhite = 1
+const ColourGreen = 2
+const ColourRed = 3
+const ColourBlue = 4
+const ColourYellow = 5
+const ColourOrange = 6
+const upColour = ColourWhite
+const leftColour = ColourGreen
+const frontColour = ColourRed
+const rightColour = ColourBlue
+const downColour = ColourYellow
+const backColour = ColourOrange
+
+function classForColour(colour) {
+    if (colour == ColourWhite) { return "sq-white" }
+    if (colour == ColourGreen) { return "sq-green" }
+    if (colour == ColourRed) { return "sq-red" }
+    if (colour == ColourBlue) { return "sq-blue" }
+    if (colour == ColourYellow) { return "sq-yellow" }
+    if (colour == ColourOrange) { return "sq-orange" }
+}
+function hashCharForColour(colour) {
+    if (colour == ColourWhite) { return "w" }
+    if (colour == ColourGreen) { return "g" }
+    if (colour == ColourRed) { return "r" }
+    if (colour == ColourBlue) { return "b" }
+    if (colour == ColourYellow) { return "y" }
+    if (colour == ColourOrange) { return "o" }
+}
+function colourForHashChar(char) {
+    if (char == "w") { return ColourWhite }
+    if (char == "g") { return ColourGreen }
+    if (char == "r") { return ColourRed }
+    if (char == "b") { return ColourBlue }
+    if (char == "y") { return ColourYellow }
+    if (char == "o") { return ColourOrange }
+    return undefined
+}
+const allColourClasses = [
+    classForColour(ColourWhite),
+    classForColour(ColourGreen),
+    classForColour(ColourRed),
+    classForColour(ColourBlue),
+    classForColour(ColourYellow),
+    classForColour(ColourOrange),
+]
+const centerSquareIndex = 4
+class Face {
+    id = ''
+    colours = [] // 9 entries: top then mid then bottom rows.
+    constructor(id, colour) {
+        this.id = id
+        this.colours = [colour, colour, colour, colour, colour, colour, colour, colour, colour]
+    }
+    applyToDom() {
+        for (let i=0; i<9; i++) {
+            this.setClass(this.element(i), this.colours[i])
+        }
+    }
+    applyIndexToDom(index) {
+        this.setClass(this.element(index), this.colours[index])
+    }
+    element(index) {
+        return document.getElementById(`sq_${this.id}${index}`)
+    }
+    setClass(element, colour) {
+        for (const c of allColourClasses) {
+            element.classList.remove(c)
+        }
+        element.classList.add(classForColour(colour))
+    }
+    addEventListeners() {
+        for (let i=0; i<9; i++) {
+            this.element(i).addEventListener('mousedown', e => {
+                this.onMouse(i, e.target)
+            })
+        }
+    }
+    onMouse(index, element) {
+        if (index == centerSquareIndex) {
+            alert('Due to the internal structure of the cube, these squares at the center of a face cannot change colour')
+            return
+        }
+        this.colours[index] = currentlySelectedColour
+        this.applyIndexToDom(index)
+        cube.setFragment()
+    }
+}
+class Faces {
+    up = new Face('u', upColour)
+    left = new Face('l', leftColour)
+    front = new Face('f', frontColour)
+    right = new Face('r', rightColour)
+    down = new Face('d', downColour)
+    back = new Face('b', backColour)
+    all() {
+        return [
+            this.up,
+            this.left,
+            this.front,
+            this.right,
+            this.down,
+            this.back,
+        ]
+    }
+    applyToDom() {
+        this.all().forEach(e => e.applyToDom())
+    }
+    addEventListeners() {
+        this.all().forEach(e => e.addEventListeners())
+    }
+}
+class Cube {
+    faces = new Faces()
+    constructor() {
+        if (window.location.hash) {
+            const slice = window.location.hash.slice(1)
+            Array.from(slice || '').forEach((c, i) => {
+                const colour = colourForHashChar(c)
+                if (colour) {
+                    const faceIndex = Math.trunc(i / 8)
+                    let squareIndex = i % 8
+                    if (squareIndex >= centerSquareIndex) { squareIndex += 1 }
+                    this.faces.all()[faceIndex].colours[squareIndex] = colour
+                }
+            })
+        }
+    }
+    applyToDom() {
+        this.faces.applyToDom()
+    }
+    addEventListeners() {
+        this.faces.addEventListeners()
+    }
+    setFragment() {
+        let hash = ''
+        for (const f of this.faces.all()) {
+            f.colours.forEach((c, i) => {
+                if (i != centerSquareIndex) {
+                    hash += hashCharForColour(c)
+                }
+            })
+        }
+        window.location.hash = hash
+    }
+}
+function addOrRemoveCssClass(element, klass, shouldAdd) {
+    if (shouldAdd) {
+        element.classList.add(klass)
+    } else {
+        element.classList.remove(klass)
+    }
+}
+function applySelectedPaletteToDom() {
+    addOrRemoveCssClass(document.getElementById('palette-white'), 'selected', currentlySelectedColour == ColourWhite)
+    addOrRemoveCssClass(document.getElementById('palette-green'), 'selected', currentlySelectedColour == ColourGreen)
+    addOrRemoveCssClass(document.getElementById('palette-red'), 'selected', currentlySelectedColour == ColourRed)
+    addOrRemoveCssClass(document.getElementById('palette-blue'), 'selected', currentlySelectedColour == ColourBlue)
+    addOrRemoveCssClass(document.getElementById('palette-yellow'), 'selected', currentlySelectedColour == ColourYellow)
+    addOrRemoveCssClass(document.getElementById('palette-orange'), 'selected', currentlySelectedColour == ColourOrange)
+}
+function onSelectPalette(colour) {
+    currentlySelectedColour = colour
+    applySelectedPaletteToDom()
+}
+let currentlySelectedColour = ColourWhite
+const cube = new Cube()
+function onDomContentLoaded() {
+    cube.addEventListeners()
+    cube.applyToDom()
+
+    // Listen to palette taps.
+    applySelectedPaletteToDom()
+    document.getElementById('palette-white').addEventListener('mousedown', e => onSelectPalette(ColourWhite))
+    document.getElementById('palette-green').addEventListener('mousedown', e => onSelectPalette(ColourGreen))
+    document.getElementById('palette-red').addEventListener('mousedown', e => onSelectPalette(ColourRed))
+    document.getElementById('palette-blue').addEventListener('mousedown', e => onSelectPalette(ColourBlue))
+    document.getElementById('palette-yellow').addEventListener('mousedown', e => onSelectPalette(ColourYellow))
+    document.getElementById('palette-orange').addEventListener('mousedown', e => onSelectPalette(ColourOrange))
+
+    // Size it accordingly. Pity this couldn't be done in CSS.
+    new ResizeObserver(entries => {
+        const contentSize = entries[0].contentBoxSize[0]
+        const width = contentSize.inlineSize
+        const height = contentSize.blockSize
+        const squareSizeToFitVertically = height / 12
+        const squareSizeToFitHorizontally = width / 9
+        const size = Math.min(squareSizeToFitVertically, squareSizeToFitHorizontally)
+        const rule = document.getElementById('square-size-style').sheet.cssRules[0]
+        rule.style.setProperty('width', `${size}px`)
+        rule.style.setProperty('height', `${size}px`)
+    }).observe(document.getElementById('cube-section'))
+}
+document.addEventListener("DOMContentLoaded", onDomContentLoaded)
+
+// Solver below.
+// Face names: up/down front/back left/right.
+function keyForEdge(colourA, colourB) {
+    return `${hashCharForColour(colourA)}_${hashCharForColour(colourB)}`
+}
+function keyForCorner(colourA, colourB, colourC) {
+    return `${hashCharForColour(colourA)}_${hashCharForColour(colourB)}_${hashCharForColour(colourC)}`
+}
+class SolverEdge {
+    a = ColourWhite // For up or down layers, this is the up/down face. For mid layer, this is the front/back side.
+    b = ColourWhite
+    key() {
+        keyForEdge(this.a, this.b)
+    }
+}
+class SolverCorner {
+    a = ColourWhite // This is the up/down face.
+    b = ColourWhite // This is the front/back face.
+    c = ColourWhite // Left/right face.
+    key() {
+        keyForCorner(this.a, this.b, this.c)
+    }
+}
+class SolverCube {
+    upFront = new SolverEdge()
+    upBack = new SolverEdge()
+    upLeft = new SolverEdge()
+    upRight = new SolverEdge()
+    upFrontLeft = new SolverCorner()
+    upFrontRight = new SolverCorner()
+    upBackLeft = new SolverCorner()
+    upBackRight = new SolverCorner()
+    midFrontLeft = new SolverEdge()
+    midFrontRight = new SolverEdge()
+    midBackLeft = new SolverEdge()
+    midBackRight = new SolverEdge()
+    downFront = new SolverEdge()
+    downBack = new SolverEdge()
+    downLeft = new SolverEdge()
+    downRight = new SolverEdge()
+    downFrontLeft = new SolverCorner()
+    downFrontRight = new SolverCorner()
+    downBackLeft = new SolverCorner()
+    downBackRight = new SolverCorner()
+    constructor(cube) {
+        this.upFront.a = cube.up.colours[7]
+        this.upFront.b = cube.front.colours[1]
+        this.upBack.a = cube.up.colours[1]
+        this.upBack.b = cube.back.colours[7]
+        this.upLeft.a = cube.up.colours[3]
+        this.upLeft.b = cube.left.colours[1]
+        this.upRight.a = cube.up.colours[5]
+        this.upRight.b = cube.right.colours[1]
+        this.upFrontLeft.a = cube.up.colours[6]
+        this.upFrontLeft.b = cube.front.colours[0]
+        this.upFrontLeft.c = cube.left.colours[2]
+        this.upFrontRight.a = cube.up.colours[8]
+        this.upFrontRight.b = cube.front.colours[2]
+        this.upFrontRight.c = cube.right.colours[0]
+        this.upBackLeft.a = cube.up.colours[0]
+        this.upBackLeft.b = cube.back.colours[6]
+        this.upBackLeft.c = cube.left.colours[0]
+        this.upBackRight.a = cube.up.colours[2]
+        this.upBackRight.b = cube.back.colours[8]
+        this.upBackRight.c = cube.right.colours[2]
+        this.midFrontLeft.a = cube.front.colours[3]
+        this.midFrontLeft.b = cube.left.colours[5]
+        this.midFrontRight.a = cube.front.colours[5]
+        this.midFrontRight.b = cube.right.colours[3]
+        this.midBackLeft.a = cube.back.colours[3]
+        this.midBackLeft.b = cube.left.colours[3]
+        this.midBackRight.a = cube.back.colours[5]
+        this.midBackRight.b = cube.right.colours[5]
+        this.downFront.a = cube.down.colours[1]
+        this.downFront.b = cube.front.colours[7]
+        this.downBack.a = cube.down.colours[7]
+        this.downBack.b = cube.back.colours[1]
+        this.downLeft.a = cube.down.colours[3]
+        this.downLeft.b = cube.left.colours[7]
+        this.downRight.a = cube.down.colours[5]
+        this.downRight.b = cube.right.colours[7]
+        this.downFrontLeft.a = cube.down.colours[0]
+        this.downFrontLeft.b = cube.front.colours[6]
+        this.downFrontLeft.c = cube.left.colours[8]
+        this.downFrontRight.a = cube.down.colours[2]
+        this.downFrontRight.b = cube.front.colours[8]
+        this.downFrontRight.c = cube.right.colours[6]
+        this.downBackLeft.a = cube.down.colours[6]
+        this.downBackLeft.b = cube.back.colours[0]
+        this.downBackLeft.c = cube.left.colours[6]
+        this.downBackRight.a = cube.down.colours[8]
+        this.downBackRight.b = cube.back.colours[2]
+        this.downBackRight.c = cube.right.colours[8]
+    }
+
+    solve() {
+        // Figure out where they all are.
+        const allEdges = new Map([
+            ["upFront", upFront],
+            ["upBack", upBack],
+            ["upLeft", upLeft],
+            ["upRight", upRight],
+            ["midFrontLeft", midFrontLeft],
+            ["midFrontRight", midFrontRight],
+            ["midBackLeft", midBackLeft],
+            ["midBackRight", midBackRight],
+            ["downFront", downFront],
+            ["downBack", downBack],
+            ["downLeft", downLeft],
+            ["downRight", downRight],
+        ])
+        const edgeLocations = new Map() // Key = coloura_colourb, value = eg "upFront"
+        for (let [k, v] of allEdges) {
+            edgeLocations.set(v.ab(), k)
+        }
+
+        // Top cross.
+        const edgeLookingFor = keyForEdge(upColour, frontColour)
+        const location = edgeLocations[edgeLookingFor]
+        if (!location) {
+            throw new Error(`An edge is missing: ${edgeLookingFor}`)
+        }
+
+
+    }
+}
+
+</script>
+</html>
