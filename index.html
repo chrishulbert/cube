@@ -10,126 +10,102 @@
 <body>
 <nav>
     <h1>Cube solver!</h1>
-    <button id="solve">Solve</button>
+    <div>
+        <button id="help">Help</button>
+        <button id="solve">Solve</button>
+    </div>
 </nav>
 <section id="cube-section" class="cube">
     <div class="cube-container">
-        <div class="facesrow up">
-            <div class="face up">
-                <div class="row">
-                    <div id="sq_u0" class="square"></div>
-                    <div id="sq_u1" class="square"></div>
-                    <div id="sq_u2" class="square"></div>
-                </div>
-                <div class="row">
-                    <div id="sq_u3" class="square"></div>
-                    <div id="sq_u4" class="square"></div>
-                    <div id="sq_u5" class="square"></div>
-                </div>
-                <div class="row">
-                    <div id="sq_u6" class="square"></div>
-                    <div id="sq_u7" class="square"></div>
-                    <div id="sq_u8" class="square"></div>
-                </div>
-            </div>
-        </div>
-        <div class="facesrow triple">
-            <div class="face left">
-                <div class="row">
-                    <div id="sq_l0" class="square"></div>
-                    <div id="sq_l1" class="square"></div>
-                    <div id="sq_l2" class="square"></div>
-                </div>
-                <div class="row">
-                    <div id="sq_l3" class="square"></div>
-                    <div id="sq_l4" class="square"></div>
-                    <div id="sq_l5" class="square"></div>
-                </div>
-                <div class="row">
-                    <div id="sq_l6" class="square"></div>
-                    <div id="sq_l7" class="square"></div>
-                    <div id="sq_l8" class="square"></div>
-                </div>
-            </div>
-            <div class="face front">
-                <div class="row">
-                    <div id="sq_f0" class="square"></div>
-                    <div id="sq_f1" class="square"></div>
-                    <div id="sq_f2" class="square"></div>
-                </div>
-                <div class="row">
-                    <div id="sq_f3" class="square"></div>
-                    <div id="sq_f4" class="square"></div>
-                    <div id="sq_f5" class="square"></div>
-                </div>
-                <div class="row">
-                    <div id="sq_f6" class="square"></div>
-                    <div id="sq_f7" class="square"></div>
-                    <div id="sq_f8" class="square"></div>
-                </div>
-            </div>
-            <div class="face right">
-                <div class="row">
-                    <div id="sq_r0" class="square"></div>
-                    <div id="sq_r1" class="square"></div>
-                    <div id="sq_r2" class="square"></div>
-                </div>
-                <div class="row">
-                    <div id="sq_r3" class="square"></div>
-                    <div id="sq_r4" class="square"></div>
-                    <div id="sq_r5" class="square"></div>
-                </div>
-                <div class="row">
-                    <div id="sq_r6" class="square"></div>
-                    <div id="sq_r7" class="square"></div>
-                    <div id="sq_r8" class="square"></div>
-                </div>
-            </div>
-            <div class="face back">
-                <div class="row">
-                    <div id="sq_b0" class="square"></div>
-                    <div id="sq_b1" class="square"></div>
-                    <div id="sq_b2" class="square"></div>
-                </div>
-                <div class="row">
-                    <div id="sq_b3" class="square"></div>
-                    <div id="sq_b4" class="square"></div>
-                    <div id="sq_b5" class="square"></div>
-                </div>
-                <div class="row">
-                    <div id="sq_b6" class="square"></div>
-                    <div id="sq_b7" class="square"></div>
-                    <div id="sq_b8" class="square"></div>
-                </div>
-            </div>
-        </div>
-        <div class="facesrow down">
-            <div class="face down">
-                <div class="row">
-                    <div id="sq_d0" class="square"></div>
-                    <div id="sq_d1" class="square"></div>
-                    <div id="sq_d2" class="square"></div>
-                </div>
-                <div class="row">
-                    <div id="sq_d3" class="square"></div>
-                    <div id="sq_d4" class="square"></div>
-                    <div id="sq_d5" class="square"></div>
-                </div>
-                <div class="row">
-                    <div id="sq_d6" class="square"></div>
-                    <div id="sq_d7" class="square"></div>
-                    <div id="sq_d8" class="square"></div>
-                </div>
-            </div>
-        </div>
+        <table>
+            <tr>
+                <td colspan="3"></td>
+                <td id="sq_u0" class="facelet t l"></td>
+                <td id="sq_u1" class="facelet t"></td>
+                <td id="sq_u2" class="facelet t r"></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td id="sq_u3" class="facelet l"></td>
+                <td id="sq_u4" class="facelet">Up</td>
+                <td id="sq_u5" class="facelet r"></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td id="sq_u6" class="facelet b l"></td>
+                <td id="sq_u7" class="facelet b"></td>
+                <td id="sq_u8" class="facelet b r"></td>
+            </tr>
+            <tr>
+                <td id="sq_l0" class="facelet t l"></td>
+                <td id="sq_l1" class="facelet t"></td>
+                <td id="sq_l2" class="facelet t r"></td>
+                <td id="sq_f0" class="facelet t l"></td>
+                <td id="sq_f1" class="facelet t"></td>
+                <td id="sq_f2" class="facelet t r"></td>
+                <td id="sq_r0" class="facelet t l"></td>
+                <td id="sq_r1" class="facelet t"></td>
+                <td id="sq_r2" class="facelet t r"></td>
+                <td id="sq_b0" class="facelet t l"></td>
+                <td id="sq_b1" class="facelet t"></td>
+                <td id="sq_b2" class="facelet t r"></td>
+            </tr>
+            <tr>
+                <td id="sq_l3" class="facelet l"></td>
+                <td id="sq_l4" class="facelet">Left</td>
+                <td id="sq_l5" class="facelet r"></td>
+                <td id="sq_f3" class="facelet l"></td>
+                <td id="sq_f4" class="facelet">Front</td>
+                <td id="sq_f5" class="facelet r"></td>
+                <td id="sq_r3" class="facelet l"></td>
+                <td id="sq_r4" class="facelet">Right</td>
+                <td id="sq_r5" class="facelet r"></td>
+                <td id="sq_b3" class="facelet l"></td>
+                <td id="sq_b4" class="facelet">Back</td>
+                <td id="sq_b5" class="facelet r"></td>
+            </tr>
+            <tr>
+                <td id="sq_l6" class="facelet b l"></td>
+                <td id="sq_l7" class="facelet b"></td>
+                <td id="sq_l8" class="facelet b r"></td>
+                <td id="sq_f6" class="facelet b l"></td>
+                <td id="sq_f7" class="facelet b"></td>
+                <td id="sq_f8" class="facelet b r"></td>
+                <td id="sq_r6" class="facelet b l"></td>
+                <td id="sq_r7" class="facelet b"></td>
+                <td id="sq_r8" class="facelet b r"></td>
+                <td id="sq_b6" class="facelet b l"></td>
+                <td id="sq_b7" class="facelet b"></td>
+                <td id="sq_b8" class="facelet b r"></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td id="sq_d0" class="facelet t l"></td>
+                <td id="sq_d1" class="facelet t"></td>
+                <td id="sq_d2" class="facelet t r"></td>
+
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td id="sq_d3" class="facelet l"></td>
+                <td id="sq_d4" class="facelet">Down</td>
+                <td id="sq_d5" class="facelet r"></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td id="sq_d6" class="facelet b l"></td>
+                <td id="sq_d7" class="facelet b"></td>
+                <td id="sq_d8" class="facelet b r"></td>
+            </tr>
+        </table>
     </div>
     <div class="palette">
-        <div id="palette-white" class="square sq-white"></div>
-        <div id="palette-green" class="square sq-green"></div>
-        <div id="palette-red" class="square sq-red"></div>
-        <div id="palette-blue" class="square sq-blue"></div>
-        <div id="palette-yellow" class="square sq-yellow"></div>
-        <div id="palette-orange" class="square sq-orange"></div>
+        <div id="palette-white" class="facelet sq-white"></div>
+        <div id="palette-green" class="facelet sq-green"></div>
+        <div id="palette-red" class="facelet sq-red"></div>
+        <div id="palette-blue" class="facelet sq-blue"></div>
+        <div id="palette-yellow" class="facelet sq-yellow"></div>
+        <div id="palette-orange" class="facelet sq-orange"></div>
     </div>
 </section>
 </body>
@@ -158,6 +134,7 @@ button {
     padding: 1em;
     border-radius: 1em;
     border: 1px solid rgba(0, 0, 0, 0.5);
+    margin-left: 0.5em;
 }
 button:hover {
     background: #66e;
@@ -177,9 +154,11 @@ section.cube .cube-container {
     left: 0;
     right: 0;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+table {
+    border-collapse: collapse;
 }
 .palette {
     position: absolute;
@@ -191,42 +170,43 @@ section.cube .cube-container {
     align-items: flex-start;
     border: 1px solid black;
 }
-section.cube .facesrow {
-    display: flex;
-}
-section.cube .face {
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-}
-section.cube .row {
-    flex-grow: 1;
-    display: flex;
-}
-.square {
+.facelet {
     background-color: gray;
     border: 1px solid black;
-    box-sizing: border-box;
+    text-align: center;
+    font-size: 0.8rem;
 }
-.square.sq-white {
+.facelet.t {
+    border-top: 5px solid black;
+}
+.facelet.l {
+    border-left: 5px solid black;
+}
+.facelet.r {
+    border-right: 5px solid black;
+}
+.facelet.b {
+    border-bottom: 5px solid black;
+}
+.facelet.sq-white {
     background-color: white;
 }
-.square.sq-red {
+.facelet.sq-red {
     background-color: red;
 }
-.square.sq-green {
+.facelet.sq-green {
     background-color: green;
 }
-.square.sq-blue {
+.facelet.sq-blue {
     background-color: blue;
 }
-.square.sq-yellow {
+.facelet.sq-yellow {
     background-color: yellow;
 }
-.square.sq-orange {
+.facelet.sq-orange {
     background-color: orange;
 }
-.square.selected {
+.facelet.selected {
      border: 5px dashed black;
 }
 .face.up {
@@ -260,10 +240,10 @@ section.cube .row {
     border-top: 0;
 }
 </style>
-<style id="square-size-style">
-.square {
+<style id="facelet-size-style">
+.facelet {
     width: 2em;
-    height: 6em;
+    height: 2em;
 }
 </style>
 <script type="module">
@@ -306,6 +286,14 @@ function colourForHashChar(char) {
     if (char == "y") { return ColourYellow }
     if (char == "o") { return ColourOrange }
     return undefined
+}
+function descriptionForColour(colour) {
+    if (colour == ColourWhite) { return "White" }
+    if (colour == ColourGreen) { return "Green" }
+    if (colour == ColourRed) { return "Red" }
+    if (colour == ColourBlue) { return "Blue" }
+    if (colour == ColourYellow) { return "Yellow" }
+    if (colour == ColourOrange) { return "Orange" }
 }
 const allColourClasses = [
     classForColour(ColourWhite),
@@ -457,16 +445,23 @@ function onDomContentLoaded() {
         const squareSizeToFitVertically = height / 9
         const squareSizeToFitHorizontally = width / 12
         const size = Math.min(squareSizeToFitVertically, squareSizeToFitHorizontally)
-        const rule = document.getElementById('square-size-style').sheet.cssRules[0]
+        const rule = document.getElementById('facelet-size-style').sheet.cssRules[0]
         rule.style.setProperty('width', `${size}px`)
         rule.style.setProperty('height', `${size}px`)
     }).observe(document.getElementById('cube-section'))
 
+    document.getElementById('help').addEventListener('click', e => help())
     document.getElementById('solve').addEventListener('click', e => solve())
 }
 document.addEventListener("DOMContentLoaded", onDomContentLoaded)
-
-// Solver below.
+function help() {
+    alert(
+        `Firstly, orient your cube so the ${descriptionForColour(frontColour)} center faces you, with the ${descriptionForColour(upColour)} center upwards.\n` +
+        'Then, select each colour on the bottom right, and paint the cube to match what you see.\n' +
+        'Lastly, click solve, and follow the instructions to get your lousy stinking frustrating cube back to normal!!! ;-)\n' +
+        'If you get an error while solving, check all the colours are correct, or perhaps your cube has been twisted to be unsolvable.'
+    )
+}
 function solve() {
     // Min2phase expects cube input in the format "UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB".
     function min2phaseFaceFromColour(colour) {
@@ -490,131 +485,5 @@ function solve() {
     const solution = min2phase.solve(all)
     alert(`Solution: ${solution}`)
 }
-// Face names: up/down front/back left/right.
-function keyForEdge(colourA, colourB) {
-    return `${hashCharForColour(colourA)}_${hashCharForColour(colourB)}`
-}
-function keyForCorner(colourA, colourB, colourC) {
-    return `${hashCharForColour(colourA)}_${hashCharForColour(colourB)}_${hashCharForColour(colourC)}`
-}
-class SolverEdge {
-    a = ColourWhite // For up or down layers, this is the up/down face. For mid layer, this is the front/back side.
-    b = ColourWhite
-    key() {
-        keyForEdge(this.a, this.b)
-    }
-}
-class SolverCorner {
-    a = ColourWhite // This is the up/down face.
-    b = ColourWhite // This is the front/back face.
-    c = ColourWhite // Left/right face.
-    key() {
-        keyForCorner(this.a, this.b, this.c)
-    }
-}
-class SolverCube {
-    upFront = new SolverEdge()
-    upBack = new SolverEdge()
-    upLeft = new SolverEdge()
-    upRight = new SolverEdge()
-    upFrontLeft = new SolverCorner()
-    upFrontRight = new SolverCorner()
-    upBackLeft = new SolverCorner()
-    upBackRight = new SolverCorner()
-    midFrontLeft = new SolverEdge()
-    midFrontRight = new SolverEdge()
-    midBackLeft = new SolverEdge()
-    midBackRight = new SolverEdge()
-    downFront = new SolverEdge()
-    downBack = new SolverEdge()
-    downLeft = new SolverEdge()
-    downRight = new SolverEdge()
-    downFrontLeft = new SolverCorner()
-    downFrontRight = new SolverCorner()
-    downBackLeft = new SolverCorner()
-    downBackRight = new SolverCorner()
-    constructor(cube) {
-        this.upFront.a = cube.up.colours[7]
-        this.upFront.b = cube.front.colours[1]
-        this.upBack.a = cube.up.colours[1]
-        this.upBack.b = cube.back.colours[7]
-        this.upLeft.a = cube.up.colours[3]
-        this.upLeft.b = cube.left.colours[1]
-        this.upRight.a = cube.up.colours[5]
-        this.upRight.b = cube.right.colours[1]
-        this.upFrontLeft.a = cube.up.colours[6]
-        this.upFrontLeft.b = cube.front.colours[0]
-        this.upFrontLeft.c = cube.left.colours[2]
-        this.upFrontRight.a = cube.up.colours[8]
-        this.upFrontRight.b = cube.front.colours[2]
-        this.upFrontRight.c = cube.right.colours[0]
-        this.upBackLeft.a = cube.up.colours[0]
-        this.upBackLeft.b = cube.back.colours[6]
-        this.upBackLeft.c = cube.left.colours[0]
-        this.upBackRight.a = cube.up.colours[2]
-        this.upBackRight.b = cube.back.colours[8]
-        this.upBackRight.c = cube.right.colours[2]
-        this.midFrontLeft.a = cube.front.colours[3]
-        this.midFrontLeft.b = cube.left.colours[5]
-        this.midFrontRight.a = cube.front.colours[5]
-        this.midFrontRight.b = cube.right.colours[3]
-        this.midBackLeft.a = cube.back.colours[3]
-        this.midBackLeft.b = cube.left.colours[3]
-        this.midBackRight.a = cube.back.colours[5]
-        this.midBackRight.b = cube.right.colours[5]
-        this.downFront.a = cube.down.colours[1]
-        this.downFront.b = cube.front.colours[7]
-        this.downBack.a = cube.down.colours[7]
-        this.downBack.b = cube.back.colours[1]
-        this.downLeft.a = cube.down.colours[3]
-        this.downLeft.b = cube.left.colours[7]
-        this.downRight.a = cube.down.colours[5]
-        this.downRight.b = cube.right.colours[7]
-        this.downFrontLeft.a = cube.down.colours[0]
-        this.downFrontLeft.b = cube.front.colours[6]
-        this.downFrontLeft.c = cube.left.colours[8]
-        this.downFrontRight.a = cube.down.colours[2]
-        this.downFrontRight.b = cube.front.colours[8]
-        this.downFrontRight.c = cube.right.colours[6]
-        this.downBackLeft.a = cube.down.colours[6]
-        this.downBackLeft.b = cube.back.colours[0]
-        this.downBackLeft.c = cube.left.colours[6]
-        this.downBackRight.a = cube.down.colours[8]
-        this.downBackRight.b = cube.back.colours[2]
-        this.downBackRight.c = cube.right.colours[8]
-    }
-
-    solve() {
-        // Figure out where they all are.
-        const allEdges = new Map([
-            ["upFront", upFront],
-            ["upBack", upBack],
-            ["upLeft", upLeft],
-            ["upRight", upRight],
-            ["midFrontLeft", midFrontLeft],
-            ["midFrontRight", midFrontRight],
-            ["midBackLeft", midBackLeft],
-            ["midBackRight", midBackRight],
-            ["downFront", downFront],
-            ["downBack", downBack],
-            ["downLeft", downLeft],
-            ["downRight", downRight],
-        ])
-        const edgeLocations = new Map() // Key = coloura_colourb, value = eg "upFront"
-        for (let [k, v] of allEdges) {
-            edgeLocations.set(v.ab(), k)
-        }
-
-        // Top cross.
-        const edgeLookingFor = keyForEdge(upColour, frontColour)
-        const location = edgeLocations[edgeLookingFor]
-        if (!location) {
-            throw new Error(`An edge is missing: ${edgeLookingFor}`)
-        }
-
-
-    }
-}
-
 </script>
 </html>
