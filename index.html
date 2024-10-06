@@ -472,6 +472,15 @@ function solve() {
         if (colour == downColour) { return "D" }
         if (colour == backColour) { return "B" }
     }
+    function colourFromMin2phaseFacelet(facelet) {
+        if (facelet == "U") { return upColour }
+        if (facelet == "L") { return leftColour }
+        if (facelet == "F") { return frontColour }
+        if (facelet == "R") { return rightColour }
+        if (facelet == "D") { return downColour }
+        if (facelet == "B") { return backColour }
+        return undefined
+    }
     function min2phaseFacesFromColours(colours) {
         return colours.map(c => min2phaseFaceFromColour(c)).join('')
     }
@@ -482,8 +491,21 @@ function solve() {
     const down = min2phaseFacesFromColours(cube.faces.down.colours)
     const back = min2phaseFacesFromColours(cube.faces.back.colours)
     const all = up + right + front + down + left + back
-    const solution = min2phase.solve(all)
-    alert(`Solution: ${solution}`)
+    const rawSolution = min2phase.solve(all).trim()
+    const solution = rawSolution.split(' ').filter(m => m.length).map(move => {
+        const colour = colourFromMin2phaseFacelet(move[0])
+        if (!colour) { return move }
+        let suffix = 'clockwise'
+        if (move[1] === "'") {
+            suffix = 'counter-clockwise'
+        } else if (move[1] === '2') {
+            suffix = '180°'
+        }
+        return descriptionForColour(colour) + '-centered face ' + suffix
+    }).join('\n')
+    console.log(solution)
+    console.log(rawSolution)
+    alert(`Solution:\n${solution}\nDone!\n(${rawSolution})`)
 }
 </script>
 </html>
