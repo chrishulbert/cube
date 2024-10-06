@@ -84,6 +84,23 @@
                     <div id="sq_r8" class="square"></div>
                 </div>
             </div>
+            <div class="face back">
+                <div class="row">
+                    <div id="sq_b0" class="square"></div>
+                    <div id="sq_b1" class="square"></div>
+                    <div id="sq_b2" class="square"></div>
+                </div>
+                <div class="row">
+                    <div id="sq_b3" class="square"></div>
+                    <div id="sq_b4" class="square"></div>
+                    <div id="sq_b5" class="square"></div>
+                </div>
+                <div class="row">
+                    <div id="sq_b6" class="square"></div>
+                    <div id="sq_b7" class="square"></div>
+                    <div id="sq_b8" class="square"></div>
+                </div>
+            </div>
         </div>
         <div class="facesrow down">
             <div class="face down">
@@ -101,25 +118,6 @@
                     <div id="sq_d6" class="square"></div>
                     <div id="sq_d7" class="square"></div>
                     <div id="sq_d8" class="square"></div>
-                </div>
-            </div>
-        </div>
-        <div class="facesrow">
-            <div class="face back">
-                <div class="row">
-                    <div id="sq_b0" class="square"></div>
-                    <div id="sq_b1" class="square"></div>
-                    <div id="sq_b2" class="square"></div>
-                </div>
-                <div class="row">
-                    <div id="sq_b3" class="square"></div>
-                    <div id="sq_b4" class="square"></div>
-                    <div id="sq_b5" class="square"></div>
-                </div>
-                <div class="row">
-                    <div id="sq_b6" class="square"></div>
-                    <div id="sq_b7" class="square"></div>
-                    <div id="sq_b8" class="square"></div>
                 </div>
             </div>
         </div>
@@ -171,9 +169,9 @@ section.cube .cube-container {
 .palette {
     position: absolute;
     bottom: 0;
-    left: 0;
+    right: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: flex-end;
     align-items: flex-start;
     border: 1px solid black;
@@ -254,11 +252,7 @@ section.cube .row {
 }
 </style>
 <script type="module">
-
-// <script type="module" src="min2phase.js"
 import min2phase from './min2phase.js'
-const x = min2phase.randomCube()
-console.log(x)
 
 const ColourWhite = 1
 const ColourGreen = 2
@@ -445,17 +439,42 @@ function onDomContentLoaded() {
         const contentSize = entries[0].contentBoxSize[0]
         const width = contentSize.inlineSize
         const height = contentSize.blockSize
-        const squareSizeToFitVertically = height / 12
-        const squareSizeToFitHorizontally = width / 9
+        const squareSizeToFitVertically = height / 9
+        const squareSizeToFitHorizontally = width / 12
         const size = Math.min(squareSizeToFitVertically, squareSizeToFitHorizontally)
         const rule = document.getElementById('square-size-style').sheet.cssRules[0]
         rule.style.setProperty('width', `${size}px`)
         rule.style.setProperty('height', `${size}px`)
     }).observe(document.getElementById('cube-section'))
+
+    document.getElementById('solve').addEventListener('click', e => solve())
 }
 document.addEventListener("DOMContentLoaded", onDomContentLoaded)
 
 // Solver below.
+function solve() {
+    // Min2phase expects cube input in the format "UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB".
+    function min2phaseFaceFromColour(colour) {
+        if (colour == upColour) { return "U" }
+        if (colour == leftColour) { return "L" }
+        if (colour == frontColour) { return "F" }
+        if (colour == rightColour) { return "R" }
+        if (colour == downColour) { return "D" }
+        if (colour == backColour) { return "B" }
+    }
+    function min2phaseFacesFromColours(colours) {
+        return colours.map(c => min2phaseFaceFromColour(c)).join('')
+    }
+    const up = min2phaseFacesFromColours(cube.faces.up.colours)
+    const front = min2phaseFacesFromColours(cube.faces.front.colours)
+    const left = min2phaseFacesFromColours(cube.faces.left.colours)
+    const right = min2phaseFacesFromColours(cube.faces.right.colours)
+    const down = min2phaseFacesFromColours(cube.faces.down.colours)
+    const back = min2phaseFacesFromColours(cube.faces.back.colours)
+    const all = up + right + front + down + left + back
+    const solution = min2phase.solve(all)
+    alert(`Solution: ${solution}`)
+}
 // Face names: up/down front/back left/right.
 function keyForEdge(colourA, colourB) {
     return `${hashCharForColour(colourA)}_${hashCharForColour(colourB)}`
