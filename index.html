@@ -495,9 +495,9 @@ function solve() {
     const solution = rawSolution.split(' ').filter(m => m.length).map(move => {
         const colour = colourFromMin2phaseFacelet(move[0])
         if (!colour) { return move }
-        let suffix = 'clockwise'
+        let suffix = 'clockwise ↻'
         if (move[1] === "'") {
-            suffix = 'counter-clockwise'
+            suffix = 'counter-clockwise ↺'
         } else if (move[1] === '2') {
             suffix = '180°'
         }
