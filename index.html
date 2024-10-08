@@ -9,7 +9,7 @@
 </head>
 <body>
 <nav>
-    <h1>Cube solver!</h1>
+    <h1>Cube solver</h1>
     <div>
         <button id="help">Help</button>
         <button id="reset">Reset</button>
@@ -113,14 +113,13 @@
 <style>
 html {
     height: 100%;
-    font-family: Superclarendon, 'Bookman Old Style', 'URW Bookman', 'URW Bookman L', 'Georgia Pro', Georgia, serif;
     font-weight: normal;
 }
 body {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #dfd;
+    background-color: #fff;
 }
 nav {
     display: flex;
@@ -131,6 +130,9 @@ nav {
 }
 nav div {
     display: flex;
+}
+h1 {
+    font-weight: 500;
 }
 button {
     color: #fff;
@@ -147,7 +149,7 @@ button:active {
     background: #44c;
 }
 section.cube {
-    background-color: #ddf;
+    background-color: #ddd;
     flex-grow: 1;
     position: relative;
 }
