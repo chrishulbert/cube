@@ -12,6 +12,7 @@
     <h1>Cube solver!</h1>
     <div>
         <button id="help">Help</button>
+        <button id="reset">Reset</button>
         <button id="solve">Solve</button>
     </div>
 </nav>
@@ -127,6 +128,9 @@ nav {
     align-items: center;
     flex-grow: 0;
     padding: 0 1em;
+}
+nav div {
+    display: flex;
 }
 button {
     color: #fff;
@@ -451,9 +455,23 @@ function onDomContentLoaded() {
     }).observe(document.getElementById('cube-section'))
 
     document.getElementById('help').addEventListener('click', e => help())
+    document.getElementById('reset').addEventListener('click', e => reset())
     document.getElementById('solve').addEventListener('click', e => solve())
 }
 document.addEventListener("DOMContentLoaded", onDomContentLoaded)
+function reset() {
+    function nine(c) {
+        return [c, c, c, c, c, c, c, c, c]
+    }
+    cube.faces.up.colours = nine(upColour)
+    cube.faces.down.colours = nine(downColour)
+    cube.faces.left.colours = nine(leftColour)
+    cube.faces.right.colours = nine(rightColour)
+    cube.faces.front.colours = nine(frontColour)
+    cube.faces.back.colours = nine(backColour)
+    cube.applyToDom()
+    cube.setFragment()
+}
 function help() {
     alert(
         `Firstly, orient your cube so the ${descriptionForColour(frontColour)} center faces you, with the ${descriptionForColour(upColour)} center upwards.\n` +
